@@ -1,20 +1,24 @@
-import React, { PropsWithChildren, useEffect } from 'react'
+import React, { PropsWithChildren, useEffect, useRef } from 'react'
 import { classNames } from '@shared/utils'
 import { App } from '@capacitor/app'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
+import { LVanBackTop } from './LVanBackTop'
 
 interface ILVanPageProps {
     className?: string
+    backTop?: boolean
 }
 
 const LVanPage: React.FC<PropsWithChildren<ILVanPageProps>> = ({
     children,
-    className
+    className,
+    backTop = false
 }) => {
     const navigate = useNavigate()
+    const containerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const listener = () => {
@@ -34,6 +38,7 @@ const LVanPage: React.FC<PropsWithChildren<ILVanPageProps>> = ({
             )}>
             <ToastContainer position="top-center" />
             {children}
+            {backTop && <LVanBackTop className="bottom-24" />}
         </div>
     )
 }

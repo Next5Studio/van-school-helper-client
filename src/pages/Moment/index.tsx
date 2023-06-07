@@ -15,6 +15,7 @@ import { ViewCommentsTree } from '@pages/Moment/widgets/ViewCommentsTree'
 
 import { mock } from '@pages/Moment/mock'
 import { TypesMoment, TypesMomentTree } from '@pages/Moment/types'
+import { LVanScrollView } from '@widgets/LVanScrollView'
 
 function Moment() {
     const [{ gallery, content, user, comments }] = useState(mock)
@@ -51,7 +52,7 @@ function Moment() {
     const onViewMore = () => {}
 
     return (
-        <LVanPage>
+        <LVanPage backTop>
             <div className="relative z-10">
                 <LVanHeader className="absolute z-20 !bg-transparent">
                     <LVanBack className="text-white" />

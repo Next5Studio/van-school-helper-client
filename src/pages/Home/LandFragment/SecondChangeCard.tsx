@@ -3,6 +3,7 @@ import { classNames } from '@shared/utils'
 import { LVanAvatar } from '@widgets/LVanAvatar'
 
 import { ViewChangeImages } from '../widgets/ViewChangeImages'
+import { useNavigate } from 'react-router-dom'
 
 interface ISecondChangeCardProps {
     className?: string
@@ -21,6 +22,7 @@ interface ISecondChangeCardProps {
         model: string
         remark: string
     }
+    changeId: string
 }
 
 const SecondChangeCard: React.FC<ISecondChangeCardProps> = ({
@@ -30,10 +32,19 @@ const SecondChangeCard: React.FC<ISecondChangeCardProps> = ({
     sellingPrice,
     quality,
     product,
+    changeId,
     className
 }) => {
+    const navigate = useNavigate()
+
+    const onCardClick = () => {
+        navigate(`/goods?changeId=${changeId}`)
+    }
+
     return (
-        <div {...classNames('w-48 mt-4 rounded-xl', className)}>
+        <div
+            {...classNames('w-48 mt-4 rounded-xl', className)}
+            onClick={onCardClick}>
             <div {...classNames('w-full h-48')}>
                 <ViewChangeImages images={previews} />
             </div>

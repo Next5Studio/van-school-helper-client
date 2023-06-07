@@ -6,6 +6,8 @@ import { Notification } from '@pages/Notification'
 import { Join } from '@pages/Join'
 import { Publish } from '@pages/Publish'
 import { Moment } from '@pages/Moment'
+import { Goods } from '@pages/Goods'
+import { User } from 'react-feather'
 
 export default createBrowserRouter([
     {
@@ -31,5 +33,13 @@ export default createBrowserRouter([
     {
         path: 'moment',
         element: <Moment />
+    },
+    {
+        path: 'goods',
+        element: <Goods />
+    },
+    {
+        path: 'user',
+        element: <User />
     }
 ])

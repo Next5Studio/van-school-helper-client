@@ -21,7 +21,7 @@ function Goods() {
     const onViewMore = () => {}
 
     return (
-        <LVanPage>
+        <LVanPage backTop>
             <div className="relative z-10">
                 <LVanHeader className="absolute z-20 !bg-transparent">
                     <LVanBack className="text-white" />
@@ -61,7 +61,7 @@ function Goods() {
                     />
                 </div>
             </div>
-            <div className="flex-1 p-4 bg-gray-100 space-y-4 pb-20">
+            <div className="flex-1 py-4 px-3 bg-gray-100 space-y-4 pb-20">
                 {/* 价格卡片 */}
                 <div className="bg-white shadow-lg p-4 rounded-lg">
                     <div className="flex items-center justify-between">

@@ -38,7 +38,7 @@ const LVanPage: React.FC<PropsWithChildren<ILVanPageProps>> = ({
             )}>
             <ToastContainer position="top-center" />
             {children}
-            {backTop && <LVanBackTop className="bottom-24" />}
+            {backTop && <LVanBackTop className="!bottom-24" />}
         </div>
     )
 }

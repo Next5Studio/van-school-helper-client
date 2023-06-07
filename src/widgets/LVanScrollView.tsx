@@ -31,7 +31,7 @@ const LVanScrollView: React.FC<PropsWithChildren<ILVanScrollViewProps>> = ({
                 {children}
             </div>
             <LVanBackTop
-                className="bottom-24"
+                className="!bottom-24"
                 target={[containerRef.current]}
             />
         </div>

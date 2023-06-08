@@ -17,10 +17,6 @@ function Chat() {
         console.log('user ===> ', user)
     }, [user])
 
-    useEffect(() => {
-        useUserStore.onLoad()
-    }, [])
-
     // 滚动条置底
     const scrollToBottom = () => {
         messageBoxRef.current.scrollTop =

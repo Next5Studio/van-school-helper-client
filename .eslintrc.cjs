@@ -6,6 +6,7 @@ module.exports = {
         config: false
     },
     rules: {
-        '@typescript-eslint/no-require-imports': 'off'
+        '@typescript-eslint/no-require-imports': 'off',
+        'react/jsx-no-useless-fragment': 'warn'
     }
 }

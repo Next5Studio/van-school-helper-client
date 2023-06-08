@@ -4,6 +4,9 @@ import { RouterProvider } from 'react-router-dom'
 
 import routes from './routes'
 
+import { LVanZustandContainer } from '@widgets/LVanZustandContainer'
+import { useUserStore } from '@shared/stores/user'
+
 import '@assets/style.scss'
 
 // 导入全局依赖
@@ -13,6 +16,8 @@ import '@config/index'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <RouterProvider router={routes} />
+        <LVanZustandContainer initializeStores={[useUserStore]}>
+            <RouterProvider router={routes} />
+        </LVanZustandContainer>
     </React.StrictMode>
 )

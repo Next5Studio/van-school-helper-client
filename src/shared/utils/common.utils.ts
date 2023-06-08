@@ -1,4 +1,4 @@
-import { create, UseBoundStore, StoreApi, StateCreator } from 'zustand'
+import { create, StateCreator, StoreApi, UseBoundStore } from 'zustand'
 
 /**
  * 获取变量的类型信息（返回字符串类型）
@@ -92,18 +92,25 @@ function isMobile() {
     return check
 }
 
-type LVanState<T> = T extends { init: StateCreator<infer S> } ? S : never
+type ExZustandStoreType<S> = UseBoundStore<StoreApi<S>> & {
+    onLoad: () => Promise<void>
+}
 
 /**
  * 统一创建store
- * UseBoundStore<StoreApi<Omit<T, 'init'>>>
  */
-function defineStore<T extends { init: StateCreator<S> }, S = LVanState<T>>(
-    initDefinition: T
-) {
-    const { init } = initDefinition
+function defineStore<S>(initDefinition: {
+    init: StateCreator<S>
+    onLoad?: (useFun: UseBoundStore<StoreApi<S>>) => Promise<void>
+}): ExZustandStoreType<S> {
+    const { init, onLoad } = initDefinition
 
-    const useFun = create<S>(init)
+    const useFun: ExZustandStoreType<S> = create<S>(
+        init
+    ) as ExZustandStoreType<S>
+    useFun.onLoad = async function () {
+        await onLoad?.(this)
+    }
 
     return useFun
 }

@@ -1,20 +1,35 @@
 import { defineStore } from '@shared/utils'
-import { create } from 'zustand'
+
+interface IUserStore {
+    user: {
+        isLogin: boolean
+    }
+}
 
 /**
  * 用户状态模型
  */
-export const useUserStore = defineStore({
+export const useUserStore = defineStore<IUserStore>({
     init: (set) => ({
         user: {
             isLogin: false
         }
-    })
-})
+    }),
+    onLoad: async (useFun) => {
+        const delay = () => {
+            return new Promise<any>((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        user: {
+                            isLogin: true
+                        }
+                    })
+                }, 3000)
+            })
+        }
 
-const testStore = create<{ user: number }>((set) => ({
-    user: 0,
-    inc: () => {
-        set({ user: 0 })
+        useFun.setState({
+            ...(await delay())
+        })
     }
-}))
+})

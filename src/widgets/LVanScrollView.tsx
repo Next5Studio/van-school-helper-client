@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef } from 'react'
+import React, { PropsWithChildren, useEffect, useRef } from 'react'
 import { classNames } from '@shared/utils'
 import { LVanBackTop } from './LVanBackTop'
 
@@ -7,22 +7,34 @@ interface ILVanScrollViewProps {
         top?: number
         bottom?: number
     }
+    className?: string
+    backTop?: boolean
+    onInit?: (element: HTMLDivElement) => void
 }
 
 const LVanScrollView: React.FC<PropsWithChildren<ILVanScrollViewProps>> = ({
     children,
-    padding
+    padding,
+    backTop = true,
+    className,
+    onInit
 }) => {
-    const containerRef = useRef<HTMLDivElement>(null)
+    const containerRef = useRef<any>(null)
 
     return (
         <div {...classNames('relative', 'h-full w-full')}>
             <div
-                ref={containerRef}
+                ref={(ele) => {
+                    containerRef.current = ele
+                    if (ele) {
+                        onInit?.(ele)
+                    }
+                }}
                 {...classNames(
                     'absolute top-0 left-0',
                     'h-full w-full',
-                    'overflow-scroll'
+                    'overflow-scroll',
+                    className
                 )}
                 style={{
                     paddingTop: padding?.top,
@@ -30,10 +42,12 @@ const LVanScrollView: React.FC<PropsWithChildren<ILVanScrollViewProps>> = ({
                 }}>
                 {children}
             </div>
-            <LVanBackTop
-                className="!bottom-24"
-                target={[containerRef.current]}
-            />
+            {backTop && (
+                <LVanBackTop
+                    className="!bottom-24"
+                    target={[containerRef.current]}
+                />
+            )}
         </div>
     )
 }

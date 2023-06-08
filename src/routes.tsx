@@ -8,6 +8,7 @@ import { Publish } from '@pages/Publish'
 import { Moment } from '@pages/Moment'
 import { Goods } from '@pages/Goods'
 import { User } from 'react-feather'
+import { Chat } from '@pages/Chat'
 
 export default createBrowserRouter([
     {
@@ -41,5 +42,9 @@ export default createBrowserRouter([
     {
         path: 'user',
         element: <User />
+    },
+    {
+        path: 'chat',
+        element: <Chat />
     }
 ])

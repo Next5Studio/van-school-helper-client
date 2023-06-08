@@ -15,7 +15,6 @@ import { ViewCommentsTree } from '@pages/Moment/widgets/ViewCommentsTree'
 
 import { mock } from '@pages/Moment/mock'
 import { TypesMoment, TypesMomentTree } from '@pages/Moment/types'
-import { LVanScrollView } from '@widgets/LVanScrollView'
 
 function Moment() {
     const [{ gallery, content, user, comments }] = useState(mock)
@@ -92,7 +91,7 @@ function Moment() {
             </div>
             <div className="relative p-5 z-20">
                 <p className="text-lg mb-2">{content}</p>
-                <ul className="flex items-center mt-6 flex-1 flex space-x-6">
+                <ul className="flex items-center mt-6 flex-1 space-x-6">
                     <li className="inline-flex items-center">
                         <Heart size={20} />
                         <span className="ml-1 text-sm">1658</span>

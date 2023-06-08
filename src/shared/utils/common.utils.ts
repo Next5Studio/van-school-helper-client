@@ -1,3 +1,5 @@
+import { create, UseBoundStore, StoreApi, StateCreator } from 'zustand'
+
 /**
  * 获取变量的类型信息（返回字符串类型）
  * @param variable 需要获取类型信息的变量
@@ -70,6 +72,10 @@ function defineSealedProperties<T>(
     )
 }
 
+/**
+ * 判断当前是否移动设备
+ * @returns true - 移动设备, false - 非移动设备
+ */
 function isMobile() {
     let check = false
     ;(function (a) {
@@ -86,4 +92,20 @@ function isMobile() {
     return check
 }
 
-export { classNames, typeOf, defineSealedProperties, isMobile }
+type LVanState<T> = T extends { init: StateCreator<infer S> } ? S : never
+
+/**
+ * 统一创建store
+ * UseBoundStore<StoreApi<Omit<T, 'init'>>>
+ */
+function defineStore<T extends { init: StateCreator<S> }, S = LVanState<T>>(
+    initDefinition: T
+) {
+    const { init } = initDefinition
+
+    const useFun = create<S>(init)
+
+    return useFun
+}
+
+export { classNames, typeOf, defineSealedProperties, isMobile, defineStore }

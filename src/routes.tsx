@@ -7,7 +7,7 @@ import { Join } from '@pages/Join'
 import { Publish } from '@pages/Publish'
 import { Moment } from '@pages/Moment'
 import { Goods } from '@pages/Goods'
-import { User } from 'react-feather'
+import { User } from '@pages/User'
 import { Chat } from '@pages/Chat'
 
 export default createBrowserRouter([

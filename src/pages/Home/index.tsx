@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { MessageSquare, Plus } from 'react-feather'
+import { MessageSquare, User } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
 import { Swiper } from 'swiper'
 
@@ -20,9 +20,11 @@ import { TemporaryWorkFragment } from '@pages/Home/TemporaryWorkFragment'
 import { ViewPublishButtonWrap } from '@pages/Home/widgets/ViewPublishButtonWrap'
 
 import { classNames } from '@shared/utils'
+import { useUserStore } from '@shared/stores/user'
 
 function Home() {
     const navigate = useNavigate()
+    const { isLogin, userId } = useUserStore((states) => states.user)
     const [navigatorHeight, setNavigatorHeight] = useState(0)
     const [fragmentSwiper, setFragmentSwiper] = useState<Swiper>()
     const [currFragmentIdx, setCurrFragmentIdx] = useState(0)
@@ -37,8 +39,13 @@ function Home() {
         setCurrFragmentIdx(swiper.activeIndex)
     }
 
+    // 用户头像点击
     const onAvatarClicked = () => {
-        navigate('/login?loginType=phone')
+        if (!isLogin) {
+            navigate('/login?loginType=phone')
+        } else {
+            navigate(`/user?userId=${userId}`)
+        }
     }
 
     const handleNavigator = (index: number) => {
@@ -66,11 +73,19 @@ function Home() {
                         onClick={() => navigate('/notification')}
                     />
                 </LVanBadge>
-                <LVanAvatar
-                    src="./images/ic_images_avatar.jpg"
-                    size={LVanSize.Small}
-                    onClick={onAvatarClicked}
-                />
+                {isLogin ? (
+                    <LVanAvatar
+                        src="./images/ic_images_avatar.jpg"
+                        size={LVanSize.Small}
+                        onClick={onAvatarClicked}
+                    />
+                ) : (
+                    <div
+                        className="rounded-full bg-gray-200 w-8 h-8 grid place-items-center"
+                        onClick={onAvatarClicked}>
+                        <User size={16} color="#524298" />
+                    </div>
+                )}
             </LVanHeader>
             <LVanSlideContainer
                 noSwipingClassName="fragment-no-swiping"

@@ -115,4 +115,30 @@ function defineStore<S>(initDefinition: {
     return useFun
 }
 
-export { classNames, typeOf, defineSealedProperties, isMobile, defineStore }
+/**
+ * 解析并获取token的payload
+ * @param token 需要解析的token
+ */
+function decodePayload(token: string | null) {
+    if (!token) return null
+    const tokenParts = token.split('.')
+    if (tokenParts.length < 2) return null
+
+    const payloadBase64 = tokenParts[1]
+    try {
+        const payloadJson = atob(payloadBase64 as string)
+        const payload = JSON.parse(payloadJson)
+        return payload
+    } catch {
+        return null
+    }
+}
+
+export {
+    classNames,
+    typeOf,
+    defineSealedProperties,
+    isMobile,
+    defineStore,
+    decodePayload
+}

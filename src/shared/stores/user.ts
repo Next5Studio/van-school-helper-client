@@ -1,8 +1,9 @@
-import { defineStore } from '@shared/utils'
+import { decodePayload, defineStore } from '@shared/utils'
 
 interface IUserStore {
     user: {
         isLogin: boolean
+        [key: string]: any
     }
 }
 
@@ -16,20 +17,16 @@ export const useUserStore = defineStore<IUserStore>({
         }
     }),
     onLoad: async (useFun) => {
-        const delay = () => {
-            return new Promise<any>((resolve) => {
-                setTimeout(() => {
-                    resolve({
-                        user: {
-                            isLogin: true
-                        }
-                    })
-                }, 3000)
+        const token = localStorage.getItem(config.app.authorization.tokenKey)
+
+        // 获取token携带的信息
+        const claims = decodePayload(token)
+        if (claims) {
+            const { user } = claims
+            useFun.setState({
+                ...user,
+                isLogin: !!user
             })
         }
-
-        useFun.setState({
-            ...(await delay())
-        })
     }
 })

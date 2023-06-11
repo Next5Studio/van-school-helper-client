@@ -1,4 +1,5 @@
 import { create, StateCreator, StoreApi, UseBoundStore } from 'zustand'
+import { resolvePath } from 'react-router-dom'
 
 /**
  * 获取变量的类型信息（返回字符串类型）
@@ -127,11 +128,23 @@ function decodePayload(token: string | null) {
     const payloadBase64 = tokenParts[1]
     try {
         const payloadJson = atob(payloadBase64 as string)
-        const payload = JSON.parse(payloadJson)
-        return payload
+        return JSON.parse(payloadJson)
     } catch {
         return null
     }
+}
+
+/**
+ * 构建静态资源相对路径
+ * @param storageURL 静态资源路径
+ */
+function resolveStorageURL(storageURL: string) {
+    const { userId } = decodePayload(
+        localStorage.getItem(config.app.authorization.tokenKey)
+    )
+    return storageURL === './images/default_avatar.png'
+        ? `/api/v1/avatar/${userId}`
+        : resolvePath(storageURL, config.app.server.staticPath).pathname
 }
 
 export {
@@ -140,5 +153,6 @@ export {
     defineSealedProperties,
     isMobile,
     defineStore,
-    decodePayload
+    decodePayload,
+    resolveStorageURL
 }

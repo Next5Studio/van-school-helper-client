@@ -8,6 +8,7 @@ interface IMessageFragmentProps {}
 const MessageFragment: React.FC<IMessageFragmentProps> = () => {
     const chatSessions = [
         {
+            sessionId: '345182f7-5628-5660-8ad4-942fa093b46f',
             contact: {
                 nickname: '❤社长夫人~',
                 avatar: './images/ic_images_avatar2.jpg'
@@ -17,6 +18,7 @@ const MessageFragment: React.FC<IMessageFragmentProps> = () => {
             messageBadge: 0
         },
         {
+            sessionId: '345182f7-5628-5660-8ad4-942fa093b46f',
             contact: {
                 nickname: '404 Not Found.',
                 avatar: './images/ic_images_avatar.jpg'
@@ -26,6 +28,7 @@ const MessageFragment: React.FC<IMessageFragmentProps> = () => {
             messageBadge: 20
         },
         {
+            sessionId: '345182f7-5628-5660-8ad4-942fa093b46f',
             contact: {
                 nickname: '粟俊',
                 avatar: './images/ic_images_avatar3.jpg'
@@ -35,6 +38,7 @@ const MessageFragment: React.FC<IMessageFragmentProps> = () => {
             messageBadge: 20
         },
         {
+            sessionId: '345182f7-5628-5660-8ad4-942fa093b46f',
             contact: {
                 nickname: 'Colin',
                 avatar: './images/ic_images_avatar4.jpg'
@@ -44,6 +48,7 @@ const MessageFragment: React.FC<IMessageFragmentProps> = () => {
             messageBadge: 2
         },
         {
+            sessionId: '345182f7-5628-5660-8ad4-942fa093b46f',
             contact: {
                 nickname: '悲剧基本法',
                 avatar: './images/ic_images_avatar5.jpg'
@@ -53,6 +58,7 @@ const MessageFragment: React.FC<IMessageFragmentProps> = () => {
             messageBadge: 10
         },
         {
+            sessionId: '345182f7-5628-5660-8ad4-942fa093b46f',
             contact: {
                 nickname: '林立伟',
                 avatar: './images/ic_images_avatar6.jpg'

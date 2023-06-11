@@ -36,7 +36,7 @@ function Chat() {
             <LVanHeader>
                 <LVanBack />
                 <div>
-                    <p>404 Not Found.</p>
+                    <p className="py-2">404 Not Found.</p>
                 </div>
             </LVanHeader>
             <LVanScrollView

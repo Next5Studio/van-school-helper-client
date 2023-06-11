@@ -18,7 +18,10 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '/api': 'http://localhost:5200'
+            '/api/v1/user': 'http://localhost:5200',
+            '/api/v1/account': 'http://localhost:5200',
+            '/api/v1/storage': 'http://localhost:5200',
+            '/api/v1/avatar': 'http://localhost:3002'
         }
     }
 })

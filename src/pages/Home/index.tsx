@@ -19,23 +19,24 @@ import { LoveWallFragment } from '@pages/Home/LoveWallFragment'
 import { TemporaryWorkFragment } from '@pages/Home/TemporaryWorkFragment'
 import { ViewPublishButtonWrap } from '@pages/Home/widgets/ViewPublishButtonWrap'
 
-import { classNames } from '@shared/utils'
+import { classNames, resolveStorageURL } from '@shared/utils'
 import { useUserStore } from '@shared/stores/user'
 
 function Home() {
     const navigate = useNavigate()
-    const { isLogin, userId } = useUserStore((states) => states.user)
+    const [isLogin, user] = useUserStore((states) => [
+        states.isLogin,
+        states.user
+    ])
     const [navigatorHeight, setNavigatorHeight] = useState(0)
     const [fragmentSwiper, setFragmentSwiper] = useState<Swiper>()
     const [currFragmentIdx, setCurrFragmentIdx] = useState(0)
 
     const onNavigatorMeasured = (data?: DOMRect) => {
-        console.log('Measured ===> ', data)
         setNavigatorHeight(data?.height || 0)
     }
 
     const onFragmentSlided = (swiper: Swiper) => {
-        console.log('Navigate to ===> ', swiper.activeIndex)
         setCurrFragmentIdx(swiper.activeIndex)
     }
 
@@ -44,7 +45,7 @@ function Home() {
         if (!isLogin) {
             navigate('/login?loginType=phone')
         } else {
-            navigate(`/user?userId=${userId}`)
+            navigate(`/user?userId=${user?.userId}`)
         }
     }
 
@@ -75,7 +76,7 @@ function Home() {
                 </LVanBadge>
                 {isLogin ? (
                     <LVanAvatar
-                        src="./images/ic_images_avatar.jpg"
+                        src={resolveStorageURL(user!.avatar)}
                         size={LVanSize.Small}
                         onClick={onAvatarClicked}
                     />

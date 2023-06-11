@@ -23,6 +23,13 @@ class UserServiceImpl extends BaseTransferService {
     public async preBindPhoneNum(phoneNum: string) {
         return this.request.post(`user/pre-bind?phoneNum=${phoneNum}`)
     }
+
+    /**
+     * 获取登录用户的个人信息
+     */
+    public async getMineDetail() {
+        return this.request.get('user/detail')
+    }
 }
 
 export const UserService = new UserServiceImpl()

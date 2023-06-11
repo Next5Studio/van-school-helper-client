@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { Plus } from 'react-feather'
 import { LVanShow } from '@widgets/LVanShow'
+import { resolveStorageURL } from '@shared/utils'
 
 interface ILVanPhotoGalleryProps {
     photos?: string[]
@@ -32,20 +33,22 @@ const LVanPhotoGallery: React.FC<ILVanPhotoGalleryProps> = ({
                 onChange={onFileChange}
             />
             <ul className="grid grid-cols-3 gap-3">
-                {photos?.map((url, index) => (
-                    <li
-                        key={index}
-                        className="w-full overflow-hidden relative rounded-lg relative"
-                        style={{
-                            aspectRatio: '1'
-                        }}>
-                        <img
-                            className="absolute w-full h-full object-cover object-center"
-                            src={`${config.app.server.staticPath}${url}`}
-                            alt={`图片${index + 1}`}
-                        />
-                    </li>
-                ))}
+                {photos?.map((url, index) => {
+                    return (
+                        <li
+                            key={index}
+                            className="w-full overflow-hidden relative rounded-lg relative"
+                            style={{
+                                aspectRatio: '1'
+                            }}>
+                            <img
+                                className="absolute w-full h-full object-cover object-center"
+                                src={resolveStorageURL(url)}
+                                alt={`图片${index + 1}`}
+                            />
+                        </li>
+                    )
+                })}
                 <LVanShow isShow={photos.length < 9}>
                     <li
                         className="w-full overflow-hidden relative rounded-lg border-dashed border-4 border-gray-300 flex items-center justify-center"

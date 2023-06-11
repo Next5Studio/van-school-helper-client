@@ -2,8 +2,10 @@ import React from 'react'
 import { LVanAvatar } from '@widgets/LVanAvatar'
 import { LVanSize } from '@widgets/types'
 import { classNames } from '@shared/utils'
+import { useNavigate } from 'react-router-dom'
 
 interface IChatSessionCardProps {
+    sessionId: string
     contact: {
         avatar: string
         nickname: string
@@ -14,15 +16,23 @@ interface IChatSessionCardProps {
 }
 
 const ChatSessionCard: React.FC<IChatSessionCardProps> = ({
+    sessionId,
     contact,
     lastContent,
     lastMessageTime,
     messageBadge
 }) => {
+    const navigate = useNavigate()
     const isMultiNum = messageBadge.toString().length > 1
 
+    const onChatSessionCardClick = () => {
+        navigate(`/chat?sessionId=${sessionId}`)
+    }
+
     return (
-        <li className="bg-gray-50 flex items-center p-4 rounded-xl">
+        <li
+            className="bg-gray-50 flex items-center p-4 rounded-xl"
+            onClick={onChatSessionCardClick}>
             <LVanAvatar
                 src={contact.avatar}
                 alt={contact.nickname}

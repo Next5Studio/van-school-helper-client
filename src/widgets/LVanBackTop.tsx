@@ -26,7 +26,6 @@ const LVanBackTop: React.FC<ILVanBackTopProps> = ({
     const handleScroll = (e: Event) => {
         const scrollTop =
             (e.target as any).scrollTop || document.documentElement.scrollTop
-        console.log('scrollTop ===> ', scrollTop)
         if (scrollTop > 300) {
             setVisible(true)
         } else {

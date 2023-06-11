@@ -16,6 +16,7 @@ import { MomentsCard } from '@pages/Home/LandFragment/MomentsCard'
 
 import { mock } from './mock'
 import { mock as homeMock } from '@pages/Home/mock'
+import { ViewMore } from '@pages/Home/widgets/ViewMore'
 
 /**
  * 页面 - 用户中心
@@ -30,6 +31,8 @@ function User() {
     const onMomentsCardClick = (momentId: string) => {
         navigate(`/moment?momentId=${momentId}`)
     }
+
+    const onViewMore = () => {}
 
     return (
         <LVanPage backTop>
@@ -55,6 +58,11 @@ function User() {
                             {user?.education?.college} · {user?.education?.clz}
                         </p>
                     </div>
+                    <ViewMore
+                        className="text-white"
+                        direction="vertical"
+                        onViewMore={onViewMore}
+                    />
                 </div>
             </div>
             <div>

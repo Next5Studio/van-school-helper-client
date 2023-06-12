@@ -21,7 +21,9 @@ export default defineConfig({
             '/api/v1/user': 'http://localhost:5200',
             '/api/v1/account': 'http://localhost:5200',
             '/api/v1/storage': 'http://localhost:5200',
-            '/api/v1/avatar': 'http://localhost:3002'
+            '/api/v1/avatar': 'http://localhost:3002',
+            '/api/v1/moment': 'http://localhost:3002',
+            '/api/v1/propose': 'http://localhost:3002'
         }
     }
 })

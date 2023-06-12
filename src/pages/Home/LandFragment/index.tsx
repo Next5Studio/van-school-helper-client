@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { LVanSlideContainer } from '@widgets/LVanSlideContainer'
@@ -12,9 +12,13 @@ import { LoveWallCard } from '@pages/Home/LandFragment/LoveWallCard'
 import { SecondChangeCard } from '@pages/Home/LandFragment/SecondChangeCard'
 
 import { mock } from '@pages/Home/mock'
+import { useMomentStore } from '@shared/stores/moment'
 
 const LandFragment: React.FC = () => {
     const navigate = useNavigate()
+    const [smoments, fetchMomentList] = useMomentStore(
+        ({ list, fetchList }) => [list, fetchList]
+    )
     const [loves] = useState(mock.loveWall)
     const [changes] = useState(mock.secondChange)
     const [moments] = useState(mock.moment)
@@ -24,6 +28,10 @@ const LandFragment: React.FC = () => {
     const onMomentsCardClick = (momentId: string) => {
         navigate(`/moment?momentId=${momentId}`)
     }
+
+    useEffect(() => {
+        fetchMomentList()
+    }, [])
 
     return (
         <ViewFragment className="space-y-6" title="校园广场">

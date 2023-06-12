@@ -1,4 +1,10 @@
-export type { AccountModel, EducationModel, UserModel }
+export type {
+    AccountModel,
+    EducationModel,
+    UserModel,
+    MomentModel,
+    ProposeModel
+}
 
 interface AccountModel {
     email: string
@@ -22,4 +28,27 @@ interface UserModel {
     totalSoldAmt: number
     account: AccountModel
     education: EducationModel
+}
+
+interface MomentModel extends ContentModel {
+    type: 'CONTENT_MOMENT'
+    momentId: string
+    userId: string
+    content: string
+    gallery: Array<string>
+}
+
+interface ProposeModel extends ContentModel {
+    type: 'CONTENT_PROPOSE'
+    proposeId: string
+    userId: string
+    cover: string
+    content: string
+}
+
+interface ContentModel<T = any> {
+    type: string
+    metadata?: T
+    createdAt: Date
+    updatedAt: Date
 }

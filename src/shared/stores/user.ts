@@ -22,7 +22,7 @@ export const useUserStore = defineStore<IUserStore>({
         if (claims) {
             // 用户已登录
             // 获取用户信息
-            const { data } = await UserService.getMineDetail()
+            const { data } = await UserService.getMineDetails()
             console.log('user ===> ', data)
             useFun.setState({
                 user: data,

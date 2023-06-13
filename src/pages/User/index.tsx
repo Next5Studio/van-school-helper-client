@@ -32,8 +32,6 @@ function User() {
         navigate(`/moment?momentId=${momentId}`)
     }
 
-    const onViewMore = () => {}
-
     return (
         <LVanPage backTop>
             <div className="relative z-10">
@@ -58,11 +56,7 @@ function User() {
                             {user?.education?.college} · {user?.education?.clz}
                         </p>
                     </div>
-                    <ViewMore
-                        className="text-white"
-                        direction="vertical"
-                        onViewMore={onViewMore}
-                    />
+                    <ViewMore className="text-white" direction="vertical" />
                 </div>
             </div>
             <div>

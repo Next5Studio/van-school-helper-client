@@ -23,8 +23,6 @@ const LandFragment: React.FC = () => {
     const [changes] = useState(mock.secondChange)
     const [moments] = useState(mock.moment)
 
-    const onViewMore = () => {}
-
     const onMomentsCardClick = (momentId: string) => {
         navigate(`/moment?momentId=${momentId}`)
     }
@@ -35,9 +33,7 @@ const LandFragment: React.FC = () => {
 
     return (
         <ViewFragment className="space-y-6" title="校园广场">
-            <ViewSection
-                title="校园恋爱季"
-                extra={<ViewMore onViewMore={onViewMore} />}>
+            <ViewSection title="校园恋爱季" extra={<ViewMore />}>
                 <LVanSlideContainer perViews="auto" freeMode mousewheel>
                     {loves.map((love) => (
                         <LVanSlideContainer.Content
@@ -48,9 +44,7 @@ const LandFragment: React.FC = () => {
                     ))}
                 </LVanSlideContainer>
             </ViewSection>
-            <ViewSection
-                title="他们都在卖"
-                extra={<ViewMore onViewMore={onViewMore} />}>
+            <ViewSection title="他们都在卖" extra={<ViewMore />}>
                 <LVanSlideContainer
                     className="-mt-2"
                     swiperClassName="!pl-4"

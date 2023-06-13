@@ -141,8 +141,6 @@ const MomentsCard: React.FC<IMomentsCardProps> = ({
     user,
     onClick
 }) => {
-    const onViewMore = () => {}
-
     return (
         <div className="flex flex-col" onClick={onClick}>
             <div className="flex items-center mb-2">
@@ -158,7 +156,7 @@ const MomentsCard: React.FC<IMomentsCardProps> = ({
                         {user?.educationInformation?.classroom}
                     </p>
                 </div>
-                <ViewMore direction="vertical" onViewMore={onViewMore} />
+                <ViewMore direction="vertical" />
             </div>
             <p className="px-1 mb-3">{content}</p>
             <Gallery gallery={gallery} />

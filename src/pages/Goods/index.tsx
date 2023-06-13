@@ -18,8 +18,6 @@ function Goods() {
 
     const qualityPercent = useMemo(() => quality * 100, [quality])
 
-    const onViewMore = () => {}
-
     return (
         <LVanPage backTop>
             <div className="relative z-10">
@@ -54,11 +52,7 @@ function Goods() {
                             {publisher?.education?.clz}
                         </p>
                     </div>
-                    <ViewMore
-                        className="text-white"
-                        direction="vertical"
-                        onViewMore={onViewMore}
-                    />
+                    <ViewMore className="text-white" direction="vertical" />
                 </div>
             </div>
             <div className="flex-1 py-4 px-3 bg-gray-100 space-y-4 pb-20">

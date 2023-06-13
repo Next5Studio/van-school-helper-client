@@ -16,7 +16,7 @@ import { ViewCommentsTree } from '@pages/Moment/widgets/ViewCommentsTree'
 
 import { TypesMoment, TypesMomentTree } from '@pages/Moment/types'
 import { useMomentStore } from '@shared/stores/moment'
-import { CommentModel } from '@shared/models'
+import { CommentService } from '@services/comment'
 import { useCommentStore } from '@shared/stores/comment'
 
 function Moment() {
@@ -25,7 +25,7 @@ function Moment() {
     const [fetchMomentDetails, dropMoment] = useMomentStore(
         ({ fetchDetails, drop }) => [fetchDetails, drop]
     )
-    const [comments, resetCommentList, fetchCommentList] = useCommentStore(
+    const [comments, resetCommentList, fetchCommetList] = useCommentStore(
         ({ list, reset, fetchList }) => [list, reset, fetchList]
     )
 
@@ -36,29 +36,36 @@ function Moment() {
 
     // 构建评论树
     const commentTrees = useMemo(() => {
-        const commentsMap: Record<string, /*TypesMoment*/ CommentModel> = {}
-        const roots: Array<
-            /*TypesMomentTree*/ CommentModel & { children?: any }
-        > = []
+        const commentsMap: Record<string, TypesMoment> = {}
+        const roots: Array<TypesMomentTree> = []
 
         if (comments) {
+            comments.forEach((comment) => {
+                commentsMap[comment.commentId] = { ...comment }
+            })
             for (const tempCmt of comments) {
-                commentsMap[tempCmt.commentId] = { ...tempCmt }
-
                 // 当前为主评论
                 if (
                     !tempCmt.belongsToCommentId ||
                     tempCmt.commentId === tempCmt.belongsToCommentId
                 ) {
-                    const mappedCmt = commentsMap[tempCmt.commentId]!
+                    const mappedCmt = commentsMap[
+                        tempCmt.commentId
+                    ]! as TypesMomentTree
                     roots.push(mappedCmt)
                 } else {
                     // 主评论回复
                     const parentNode = commentsMap[
                         tempCmt.belongsToCommentId
-                    ] as CommentModel & { children?: any }
+                    ] as TypesMomentTree
+                    console.log(
+                        'belongsToCommentId ===> ',
+                        tempCmt.belongsToCommentId,
+                        parentNode,
+                        commentsMap
+                    )
                     if (!parentNode?.children) {
-                        parentNode!.children = [commentsMap[tempCmt.commentId]!]
+                        parentNode.children = [commentsMap[tempCmt.commentId]!]
                     } else {
                         parentNode.children.push(
                             commentsMap[tempCmt.commentId]!
@@ -86,7 +93,7 @@ function Moment() {
         resetCommentList()
         if (momentId) {
             fetchMomentDetails(momentId).then(setMomentDetails)
-            fetchCommentList(momentId)
+            fetchCommetList(momentId)
         }
     }, [])
 

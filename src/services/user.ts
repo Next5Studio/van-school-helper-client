@@ -27,8 +27,17 @@ class UserServiceImpl extends BaseTransferService {
     /**
      * 获取登录用户的个人信息
      */
-    public async getMineDetail() {
+    public async getMineDetails() {
         return this.request.get('user/details')
+    }
+
+    /**
+     * 获取userId对应用户个人信息
+     * @param userId 需要获取个人信息的用户
+     * @returns 用户个人信息
+     */
+    public getUserDetails(userId: string) {
+        return this.request.get(`user/${userId}/details`)
     }
 }
 

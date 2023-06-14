@@ -15,10 +15,11 @@ function Publish() {
 
     const publishType = useMemo(
         () =>
-            (searchParams.get('publishType') as PublishType) ||
+            (searchParams.get('publishType') as PublishType) ??
             PublishType.Land,
         [searchParams]
     )
+
     return (
         <LVanPage>
             <PublishLandFragment />

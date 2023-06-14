@@ -21,7 +21,10 @@ export const useProposeStore = defineStore<IProposeStore & IProposeActions>({
         fetchList: async () => {
             const { currentPage, totalCount, pageSize } = get()
             if (!totalCount || currentPage * pageSize < totalCount) {
-                const { data } = await ProposeService.all(get().currentPage + 1)
+                const { data } = await ProposeService.all(
+                    currentPage + 1,
+                    pageSize
+                )
                 console.log(data)
                 set((state) => ({
                     list: [...state.list, ...data.list],

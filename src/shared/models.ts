@@ -3,7 +3,20 @@ export type {
     EducationModel,
     UserModel,
     MomentModel,
-    ProposeModel
+    ProposeModel,
+    CommentModel
+}
+
+interface CommentModel {
+    type: 'CONTENT_COMMENT'
+    relatedContentId: string
+    userId: string
+    content: string
+    belongsToCommentId?: string | null
+    replyToCommentId?: string | null
+    createdAt: string
+    updatedAt: string
+    commentId: string
 }
 
 interface AccountModel {

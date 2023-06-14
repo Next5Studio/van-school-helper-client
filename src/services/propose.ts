@@ -1,12 +1,12 @@
 import { BaseContentDTO, RestContentService } from '@services/content'
 
-export interface CreateMomentDTO extends BaseContentDTO {
+export interface CreateProposeDTO extends BaseContentDTO {
     userId: string
     content: string
     cover: string
 }
 
-class ProposeServiceImpl extends RestContentService<CreateMomentDTO> {
+class ProposeServiceImpl extends RestContentService<CreateProposeDTO> {
     protected readonly ResourceName = 'propose'
 
     public constructor() {

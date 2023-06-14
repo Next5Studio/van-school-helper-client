@@ -3,7 +3,7 @@ export default {
         tokenKey: 'token'
     },
     server: {
-        staticPath: 'http://127.0.0.1:5200/storage'
+        staticPath: 'http://119.91.139.153:5200/storage'
     },
     transfer: {
         baseURL: '/api/v1/',
